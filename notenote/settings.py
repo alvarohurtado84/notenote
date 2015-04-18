@@ -110,3 +110,6 @@ STATIC_URL = '/static/'
 # User model to be use by default
 AUTH_USER_MODEL = 'nuser.User'
 
+
+# Settings for Django Rest Framework
+from notenote.drf_settings import *
