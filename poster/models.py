@@ -12,6 +12,6 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(blank=True)
 
 
