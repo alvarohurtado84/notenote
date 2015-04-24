@@ -2,16 +2,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="{% static "js/react-0.13.2/react.js" %}"></script>
-    <script src="{% static "js/react-0.13.2/JSXTransformer.js" %}"></script>
+      <script src="{% static "js/react-0.13.2/react.js" %}"></script>
+      <script src="{% static "js/react-0.13.2/JSXTransformer.js" %}"></script>
+      <script type="text/jsx" src="{% static "js/app/notenote.js" %}"></script>
   </head>
   <body>
     <div id="example"></div>
-    <script type="text/jsx">
-      React.render(
-        <h1>Hello, world!</h1>,
-        document.getElementById('example')
-      );
-    </script>
   </body>
 </html>
