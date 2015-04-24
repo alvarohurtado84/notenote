@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic.base import TemplateView
 
 
 urlpatterns = [
@@ -12,7 +14,18 @@ urlpatterns = [
     url(r'^admin/',
         include(admin.site.urls)),
 
+    # Home Page
+    url(r'^$',
+        TemplateView.as_view(template_name='home.html'),
+        name='home'),
+
     # Rest of urls for Notenote
     url(r'^', include('poster.urls')),
 
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += ('django.contrib.staticfiles.views',
+        url(r'^static/(?P<path>.*)$', 'serve'),
+    )
