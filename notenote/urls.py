@@ -7,13 +7,13 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
 
-    # Login & Logout API by Django Rest Framework
-    url(r'^api-auth/',
-        include('rest_framework.urls', namespace='rest_framework')),
-
     # Django Admin Panel urls
     url(r'^admin/',
         include(admin.site.urls)),
+
+    # API urls
+    url(r'api/',
+        include('api.urls')),
 
     # Home Page
     url(r'^$',
