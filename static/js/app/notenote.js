@@ -26,7 +26,7 @@ var PostList = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data){
-                this.setState({data: data});
+                this.setState({data: data.results, next:data.next, previous:data.previous});
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -48,6 +48,8 @@ var PostList = React.createClass({
         return (
             <div className='notenote-postlist'>
                 {postNodes}
+                <span>{this.state.next}</span>
+                <span>{this.state.previous}</span>
             </div>
         )
     }
