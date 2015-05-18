@@ -1,0 +1,25 @@
+{
+  "name": "notenote",
+  "version": "0.0.1",
+  "description": "Note blogging",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alvarohurtado84/notenote.git"
+  },
+  "author": "Alvaro Hurtado Mochon @alvarolab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvarohurtado84/notenote/issues"
+  },
+  "homepage": "https://github.com/alvarohurtado84/notenote",
+  "dependencies": {
+    "browserify": "^10.2.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "react-tools": "^0.13.3"
+  }
+}
