@@ -67,3 +67,5 @@ db.sqlite3
 
 # NodeJS packages
 node_modules/
+static/js/app/app.js
+
