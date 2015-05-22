@@ -1,37 +1,12 @@
-/** @jsx React.DOM */
-var React = require('react');
-var Router = require('react-router');
+'use strict';
+
+var $            = require('jquery');
+var React        = require('react');
+var Router       = require('react-router');
+var Post         = require('./Post.jsx');
 
 // Setting routing settings
-var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
-
-
-var Post = React.createClass({
-    render: function() {
-        return (
-            <div className='notenote-post'>
-                {this.props.children}
-                <br/>
-                <span class='author'>
-                    by {this.props.written_by}
-                </span>
-            </div>
-        );
-    }
-});
-
-var PostList = React.createClass({
-    render: function() {
-        return (
-            <div className='notenote-postlist'>
-                <RouteHandler/>
-            </div>
-        )
-    }
-});
+var Link         = Router.Link;
 
 var Page = React.createClass({
     contextTypes: {
@@ -75,7 +50,7 @@ var Page = React.createClass({
         this.loadPostsFromServer(newProps.params.pageNo);
     },
 
-    componentWillUpdate: function(nextProps, nextState){  
+    componentWillUpdate: function(nextProps, nextState){
     },
 
     loadPostsFromServer: function(page){
@@ -87,8 +62,8 @@ var Page = React.createClass({
             cache: false,
             success: function(data){
                 this.setState({
-                    data: data.results, 
-                    hasNext: data.next, 
+                    data: data.results,
+                    hasNext: data.next,
                     hasPrevious: data.previous,
                 });
             }.bind(this),
@@ -124,20 +99,12 @@ var Page = React.createClass({
         return (
             <div>
                 {postNodes}
-                {this.getLink('Previous', this.getPreviousPage())} 
+                {this.getLink('Previous', this.getPreviousPage())}
                 {this.getLink('Next', this.getNextPage())}
             </div>
         )
     }
 });
 
-var routes = (
-  <Route name="home" path="/" handler={PostList}>
-    <Route name="page" path="/page/:pageNo" handler={Page}/>
-    <DefaultRoute handler={Page}/>
-  </Route>
-);
 
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('content'));
-});
+module.exports = Page;
