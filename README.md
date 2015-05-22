@@ -25,12 +25,9 @@ $ pip -r requirements/base.txt
 Install npm modules requirements:
 ```
 $ npm install
-$ npm run watch # for development
-$ npm run build # for production
 ```
 
-
-And runserver:
+And run the app:
 ```
-$ python manage.py runserver
+$ honcho start
 ```
