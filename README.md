@@ -14,3 +14,23 @@ I will use Django + Django Rest Framework in the backend side. I will use ReactJ
 - Because I want to learn how to build Single Page Applications.
 - Because I want to use that brand for something
 - Because why not.
+
+
+### How to run this project?
+Install python requirements:
+```
+$ pip -r requirements/base.txt
+```
+
+Install npm modules requirements:
+```
+$ npm install
+$ npm run watch # for development
+$ npm run build # for production
+```
+
+
+And runserver:
+```
+$ python manage.py runserver
+```
