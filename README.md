@@ -17,20 +17,20 @@ I will use Django + Django Rest Framework in the backend side. I will use ReactJ
 
 
 ### How to run this project?
-
 Install python requirements:
-```pip -r requirements/base.txt```
+```
+$ pip -r requirements/base.txt
+```
 
-Install node requirements:
-```npm install```
-```npm install -g browserify```
-```npm install -g react-tools```
+Install npm modules requirements:
+```
+$ npm install
+$ npm run watch # for development
+$ npm run build # for production
+```
 
-Parse JSX to JS:
-```jsx static/js/app/ static/js/build/```
-
-Browserify it:
-```browserify static/js/build/notenote.js -o static/js/app/app.js```
 
 And runserver:
-```python manage.py runserver```
+```
+$ python manage.py runserver
+```
