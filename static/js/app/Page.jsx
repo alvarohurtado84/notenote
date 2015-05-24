@@ -4,6 +4,7 @@ var $            = require('jquery');
 var React        = require('react');
 var Router       = require('react-router');
 var Post         = require('./Post.jsx');
+var url          = require('./config.json').url;
 
 // Setting routing settings
 var Link         = Router.Link;
@@ -22,7 +23,6 @@ var Page = React.createClass({
     },
 
     getUrl: function(page){
-        var url = '/api/posts/';
         var pageToLoad = page || this.state.currentPage;
         if(pageToLoad){
             url += '?page=' + pageToLoad;
