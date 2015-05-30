@@ -12,13 +12,12 @@ var RouteHandler = Router.RouteHandler;
 var Post = React.createClass({
     render: function() {
         return (
-            <div className='notenote-post'>
+            <article>
                 {this.props.children}
-                <br/>
                 <span class='author'>
                     by {this.props.written_by}
                 </span>
-            </div>
+            </article>
         );
     }
 });
@@ -126,7 +125,7 @@ var Page = React.createClass({
         });
 
         return (
-            <div>
+            <div className="post-list">
                 {postNodes}
                 {this.getLink('Previous', this.getPreviousPage())} 
                 {this.getLink('Next', this.getNextPage())}
