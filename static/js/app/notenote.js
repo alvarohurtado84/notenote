@@ -125,11 +125,11 @@ var Page = React.createClass({
         });
 
         return (
-            <div className="post-list">
+            <main>
                 {postNodes}
                 {this.getLink('Previous', this.getPreviousPage())} 
                 {this.getLink('Next', this.getNextPage())}
-            </div>
+            </main>
         )
     }
 });
