@@ -48,7 +48,7 @@ body {
 	transition: all 600ms;
 }
 
-section {
+section, main {
 	max-width: 600px;
 	height: 100%;
 	margin: auto;
