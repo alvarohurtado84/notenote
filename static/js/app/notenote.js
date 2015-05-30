@@ -48,22 +48,26 @@ var Page = React.createClass({
 
     getUrl: function(page){
         var url = '/api/posts/';
-        var pageToLoad = page || this.state.currentPage;
+        var pageToLoad = page || this.getCurrentPage();
         if(pageToLoad){
             url += '?page=' + pageToLoad;
         }
         return url;
     },
 
+    getCurrentPage: function(){
+        return this.state.currentPage || 1;
+    },
+
     getPreviousPage: function(){
-        if(this.state.hasPrevious && this.state.currentPage > 1){
-            return this.state.currentPage - 1;
+        if(this.state.hasPrevious && this.getCurrentPage() > 1){
+            return this.getCurrentPage() - 1;
         }
     },
 
     getNextPage: function(){
         if(this.state.hasNext){
-            return this.state.currentPage + 1;
+            return this.getCurrentPage() + 1;
         }
     },
 
@@ -114,7 +118,7 @@ var Page = React.createClass({
     },
 
     render: function() {
-        console.log('rendering page... ' + this.state.currentPage);
+        console.log('rendering page... ' + this.getCurrentPage());
         var postNodes = this.state.data.map(function (post){
             return (
                 <Post written_by={post.written_by}>{post.content}</Post>
@@ -132,9 +136,9 @@ var Page = React.createClass({
 });
 
 var routes = (
-  <Route name="home" path="/" handler={PostList}>
+  <Route name="home" path="/">
+    <Route handler={Page}/>
     <Route name="page" path="/page/:pageNo" handler={Page}/>
-    <DefaultRoute handler={Page}/>
   </Route>
 );
 
