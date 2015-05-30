@@ -1,3 +1,13 @@
+/** @jsx React.DOM */
+var React = require('react');
+var Router = require('react-router');
+
+// Setting routing settings
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+
 
 var Post = React.createClass({
     render: function() {
@@ -13,32 +23,98 @@ var Post = React.createClass({
     }
 });
 
-
 var PostList = React.createClass({
+    render: function() {
+        return (
+            <div className='notenote-postlist'>
+                <RouteHandler/>
+            </div>
+        )
+    }
+});
 
-    getInitialState: function(){
-        return {data: []};
+var Page = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.func
     },
 
-    loadPostsFromServer: function(){
+    getInitialState: function(){
+        console.log("Params: " + this.context.router.getCurrentParams().pageNo);
+        return {
+            currentPage: parseInt(this.context.router.getCurrentParams().pageNo),
+            data: []
+        };
+    },
+
+    getUrl: function(page){
+        var url = '/api/posts/';
+        var pageToLoad = page || this.state.currentPage;
+        if(pageToLoad){
+            url += '?page=' + pageToLoad;
+        }
+        return url;
+    },
+
+    getPreviousPage: function(){
+        if(this.state.hasPrevious && this.state.currentPage > 1){
+            return this.state.currentPage - 1;
+        }
+    },
+
+    getNextPage: function(){
+        if(this.state.hasNext){
+            return this.state.currentPage + 1;
+        }
+    },
+
+    componentWillReceiveProps: function(newProps){
+        console.log('PageNo:' + newProps.params.pageNo);
+        this.setState({
+            currentPage: parseInt(newProps.params.pageNo)
+        });
+        this.loadPostsFromServer(newProps.params.pageNo);
+    },
+
+    componentWillUpdate: function(nextProps, nextState){  
+    },
+
+    loadPostsFromServer: function(page){
+        console.log('load from server... ' + this.getUrl());
+        var url = this.getUrl(page);
         $.ajax({
-            url: this.props.url,
+            url: url,
             dataType: 'json',
             cache: false,
             success: function(data){
-                this.setState({data: data});
+                this.setState({
+                    data: data.results, 
+                    hasNext: data.next, 
+                    hasPrevious: data.previous,
+                });
             }.bind(this),
             error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error(url, status, err.toString());
             }.bind(this)
         });
     },
 
     componentDidMount: function(){
+        console.log('component did mount...');
         this.loadPostsFromServer();
     },
 
+    getLink(text, pageNumber){
+        if(pageNumber){
+            return(
+                <Link to="page" params={{pageNo:pageNumber}}>{text}</Link>
+            );
+        }else{
+            return '';
+        }
+    },
+
     render: function() {
+        console.log('rendering page... ' + this.state.currentPage);
         var postNodes = this.state.data.map(function (post){
             return (
                 <Post written_by={post.written_by}>{post.content}</Post>
@@ -46,15 +122,22 @@ var PostList = React.createClass({
         });
 
         return (
-            <div className='notenote-postlist'>
+            <div>
                 {postNodes}
+                {this.getLink('Previous', this.getPreviousPage())} 
+                {this.getLink('Next', this.getNextPage())}
             </div>
         )
     }
 });
 
-
-React.render(
-<PostList url='http://localhost:8000/api/posts/' />,
-    document.getElementById('content')
+var routes = (
+  <Route name="home" path="/" handler={PostList}>
+    <Route name="page" path="/page/:pageNo" handler={Page}/>
+    <DefaultRoute handler={Page}/>
+  </Route>
 );
+
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.getElementById('content'));
+});
