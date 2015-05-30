@@ -23,16 +23,6 @@ var Post = React.createClass({
 });
 
 var PostList = React.createClass({
-    render: function() {
-        return (
-            <div className='notenote-postlist'>
-                <RouteHandler/>
-            </div>
-        )
-    }
-});
-
-var Page = React.createClass({
     contextTypes: {
         router: React.PropTypes.func
     },
@@ -136,8 +126,8 @@ var Page = React.createClass({
 
 var routes = (
   <Route name="home" path="/">
-    <Route handler={Page}/>
-    <Route name="page" path="/page/:pageNo" handler={Page}/>
+    <Route handler={PostList}/>
+    <Route name="page" path="/page/:pageNo" handler={PostList}/>
   </Route>
 );
 
