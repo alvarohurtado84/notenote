@@ -14,6 +14,12 @@ var Post = React.createClass({
         });
     },
 
+    stopEdit: function() {
+        this.setState({
+            editMode: false
+        });
+    },
+
     getEditMode: function(){
         if(this.state.editMode){
             return this.state.editMode;
@@ -22,15 +28,23 @@ var Post = React.createClass({
         }
     },
 
+    saveAndStopEdit: function(){
+    },
+
+    save(): function(){
+    },
+
     render: function() {
         return (
             <div>
-                <article onClick={this.startEdit} contentEditable={this.getEditMode()} ref="myContent">
+                <article contentEditable={this.getEditMode()} ref="myContent">
                     {this.props.children}
                 </article>
                 <span class='author'>
                     by <strong>{this.props.written_by}</strong>
                 </span>
+                <input type='button' onClick={this.startEdit} value='Edit' />
+                <input type='button' onClick={this.stopEdit} value='Save' />
             </div>
         );
     }
