@@ -4,22 +4,35 @@
   "description": "Note blogging",
   "main": " ",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./static/build/js",
+    "watch": "nodemon --watch ./static/js/ -e js,jsx --exec 'browserify -t babelify -e ./static/js/app/App.jsx > ./static/build/js/app.js --debug'",
+    "lint": "eslint ./static/js/app/*.jsx",
+    "prebuild": "npm run clean && mkdir -p ./static/build/js/",
+    "build": "browserify -t babelify -e ./static/js/app/App.jsx | uglifyjs -c > ./static/build/js/app.min.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/alvarohurtado84/notenote.git"
   },
-  "author": "Alvaro Hurtado Mochon @alvarolab",
+  "author": "Alvaro Hurtado Mochon <alvarohurtado84@gmail.com> (http://www.alvarohurtado.es/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alvarohurtado84/notenote/issues"
   },
   "homepage": "https://github.com/alvarohurtado84/notenote",
   "dependencies": {
-    "browserify": "^10.2.0",
+    "jquery": "^2.1.4",
     "react": "^0.13.3",
-    "react-router": "^0.13.3",
-    "react-tools": "^0.13.3"
+    "react-router": "^0.13.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^3.1.7",
+    "babelify": "^6.1.1",
+    "browserify": "^10.2.0",
+    "eslint": "^0.21.2",
+    "eslint-plugin-react": "^2.3.0",
+    "eslint-stylish": "^0.2.0",
+    "nodemon": "^1.3.7",
+    "uglifyify": "^3.0.1"
   }
 }
