@@ -1,9 +1,12 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+var $ = require('jQuery');
 
 // Notenote.co components
 var Post = require('./Post');
+
+// config
 var apiUrl = require('../config').apiUrl;
 
 var PostList = React.createClass({

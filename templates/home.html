@@ -8,10 +8,6 @@
   </head>
   <body>
     <div id="content"></div>
-    {% if settings.DEBUG %}
-        <script src="{% static "build/js/app.js" %}"></script>
-    {% else %}
-        <script src="{% static "build/js/app.min.js" %}"></script>
-    {% endif %}
+    <script src="{% static "build/js/app.js" %}"></script>
   </body>
 </html>
