@@ -1,11 +1,10 @@
-/** @jsx React.DOM */
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
 // Notenote.co components
 var Post = require('./Post');
-
+var apiUrl = require('../config').apiUrl;
 
 var PostList = React.createClass({
     contextTypes: {
@@ -21,7 +20,7 @@ var PostList = React.createClass({
     },
 
     getUrl: function(page){
-        var url = '/api/posts/';
+        var url = apiUrl;
         var pageToLoad = page || this.getCurrentPage();
         if(pageToLoad){
             url += '?page=' + pageToLoad;
@@ -53,7 +52,7 @@ var PostList = React.createClass({
         this.loadPostsFromServer(newProps.params.pageNo);
     },
 
-    componentWillUpdate: function(nextProps, nextState){  
+    componentWillUpdate: function(nextProps, nextState){
     },
 
     loadPostsFromServer: function(page){
@@ -65,8 +64,8 @@ var PostList = React.createClass({
             cache: false,
             success: function(data){
                 this.setState({
-                    data: data.results, 
-                    hasNext: data.next, 
+                    data: data.results,
+                    hasNext: data.next,
                     hasPrevious: data.previous,
                 });
             }.bind(this),
@@ -102,7 +101,7 @@ var PostList = React.createClass({
         return (
             <main>
                 {postNodes}
-                {this.getLink('Previous', this.getPreviousPage())} 
+                {this.getLink('Previous', this.getPreviousPage())}
                 {this.getLink('Next', this.getNextPage())}
             </main>
         )
