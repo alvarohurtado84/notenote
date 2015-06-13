@@ -5,8 +5,9 @@ from poster.models import Post
 
 class PostSerializer(serializers.ModelSerializer):  # serializers.HyperlinkedModelSerializer):
 
-    written_by = serializers.CharField()
+    username = serializers.CharField(source='written_by.username',
+                                     read_only=True)
 
     class Meta:
         model = Post
-        fields = ('content', 'written_by', 'published_at')
+        fields = ('content', 'written_by', 'published_at', 'username', )
