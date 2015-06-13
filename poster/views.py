@@ -11,3 +11,7 @@ class PostViewSet(viewsets.ModelViewSet):
         Post.objects.exclude(published_at=None).order_by('-published_at')
     )
     serializer_class = PostSerializer
+
+    def create(self, request, *args, **kwargs):
+        request.data["written_by"] = request.user.pk
+        return super(PostViewSet, self).create(request, *args, **kwargs)
