@@ -6,8 +6,8 @@ var $ = require('jQuery');
 // Notenote.co components
 var Post = require('./Post');
 
-// config
-var apiUrl = require('../config').apiUrl;
+// config variables
+var postsUrl = require('../config').postsUrl;
 
 var PostList = React.createClass({
     contextTypes: {
@@ -23,7 +23,7 @@ var PostList = React.createClass({
     },
 
     getUrl: function(page){
-        var url = apiUrl;
+        var url = postsUrl;
         var pageToLoad = page || this.getCurrentPage();
         if(pageToLoad){
             url += '?page=' + pageToLoad;
@@ -97,7 +97,7 @@ var PostList = React.createClass({
         console.log('rendering page... ' + this.getCurrentPage());
         var postNodes = this.state.data.map(function (post){
             return (
-                <Post username={post.username}>{post.content}</Post>
+                <Post username={post.username} myId={post.id}>{post.content}</Post>
             );
         });
 
