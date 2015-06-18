@@ -9,7 +9,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """API endpoint that allows Posts to be viewed."""
 
     queryset = (
-        Post.objects.exclude(published_at=None).order_by('-published_at')
+        Post.objects.order_by('-created_at') # .exclude(published_at=None).order_by('-published_at')
     )
     serializer_class = PostSerializer
 
