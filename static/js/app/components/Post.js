@@ -12,7 +12,9 @@ var postsUrl = require('../config').postsUrl;
 var Post = React.createClass({
 
     getInitialState: function() {
-        return {};
+        return {
+            editMode: this.props.edit || false
+        };
     },
 
     startEdit: function() {
