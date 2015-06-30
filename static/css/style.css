@@ -1,0 +1,12 @@
+
+[contenteditable="true"]{
+    border: 3px grey solid;
+}
+
+[contenteditable="true"]:focus{
+    border: 3px coral solid;
+}
+
+.hide{
+    display: none;
+}

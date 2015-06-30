@@ -9,12 +9,13 @@ var RouteHandler = Router.RouteHandler;
 // Notenote.co components
 var Post = require('./components/Post');
 var PostList = require('./components/PostList');
-
+var CreatePost = require('./components/CreatePost');
 
 var routes = (
   <Route name="home" path="/">
     <Route handler={PostList}/>
     <Route name="page" path="/page/:pageNo" handler={PostList}/>
+    <Route name="newPost" path="/new" handler={CreatePost}/>
   </Route>
 );
 
