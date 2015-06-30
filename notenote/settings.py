@@ -115,5 +115,12 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'nuser.User'
 
 
+# Setting up Bleach to avoid XSS
+import bleach
+ALLOWED_ATTRIBUTES = bleach.ALLOWED_ATTRIBUTES
+ALLOWED_STYLES = bleach.ALLOWED_STYLES
+ALLOWED_TAGS = bleach.ALLOWED_TAGS + [u'br', u'p']
+
+
 # Settings for Django Rest Framework
 from notenote.drf_settings import *
