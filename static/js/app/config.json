@@ -1,3 +1,4 @@
 {
-    "apiUrl": "/api/posts/"
+    "postsUrl": "/api/posts/",
+    "updatePostUrl": "/api/posts/{id}/"
 }

@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/alvarohurtado84/notenote",
   "dependencies": {
+    "format-unicorn": "^1.1.0",
     "jquery": "^2.1.4",
     "react": "^0.13.3",
+    "react-cookie": "^0.2.3",
     "react-router": "^0.13.3"
   },
   "devDependencies": {
