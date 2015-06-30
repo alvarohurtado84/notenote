@@ -108,6 +108,12 @@ var Post = React.createClass({
     },
 
     render: function() {
+        var renderedSave = (<input type='button' onClick={this.saveAndStopEdit} value='Save' />);
+        var renderedEdit = '';
+        if(!this.getEditMode()){
+            renderedEdit = (<input type='button' onClick={this.startEdit} value='Edit' />);
+        }
+
         return (
             <div>
                 <article contentEditable={this.getEditMode()} ref="myContent"
@@ -115,8 +121,8 @@ var Post = React.createClass({
                 <span class='author'>
                     by <strong>{this.props.username}</strong>
                 </span>
-                <input type='button' onClick={this.startEdit} value='Edit' />
-                <input type='button' onClick={this.saveAndStopEdit} value='Save' />
+                {renderedEdit}
+                {renderedSave}
             </div>
         );
     }
