@@ -103,6 +103,7 @@ var PostList = React.createClass({
 
         return (
             <main>
+                <Link to='newPost'>New post</Link>
                 {postNodes}
                 {this.getLink('Previous', this.getPreviousPage())}
                 {this.getLink('Next', this.getNextPage())}
