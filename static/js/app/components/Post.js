@@ -107,6 +107,37 @@ var Post = React.createClass({
         $.ajax(saveCall);
     },
 
+    getContextLine: function(){
+        var where = '';
+        if(this.props.post.where){
+            where = (
+                <span class='where'>{this.props.post.where}</span>
+            )
+        }
+
+        var who = '';
+        if(this.props.post.where){
+            who = (
+                <span class='who'>{this.props.post.who}</span>
+            )
+        }
+
+        var when = '';
+        if(this.props.post.when){
+            when = (
+                <span class='when'>{this.props.post.when}</span>
+            )
+        }
+
+        return (
+            <div class='context'>
+                { who ? 'by ' : ''}{ who ? who : '' }
+                { where ? ' in ' : ''}{ where ? where : '' }
+                { when ? ' in ' : ''}{ when ? when : '' }
+            </div>
+        )
+    },
+
     render: function() {
         var renderedSave = (<input type='button' onClick={this.saveAndStopEdit} value='Save' />);
         var renderedEdit = '';
@@ -118,6 +149,7 @@ var Post = React.createClass({
             <div>
                 <article contentEditable={this.getEditMode()} ref="myContent"
                 dangerouslySetInnerHTML={{__html:this.props.children}} />
+                {this.getContextLine()}
                 <span class='author'>
                     by <strong>{this.props.username}</strong>
                 </span>
