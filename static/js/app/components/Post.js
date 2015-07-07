@@ -20,6 +20,15 @@ var Post = React.createClass({
         };
     },
 
+    componentWillReceiveProps: function(newProps){
+        this.setState({
+            editMode: newProps.edit || false,
+            who: newProps.post.who,
+            where: newProps.post.where,
+            when: newProps.post.when
+        });
+    },
+
     startEdit: function() {
         this.setState({
             editMode: true
