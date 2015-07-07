@@ -174,9 +174,9 @@ var Post = React.createClass({
     getEditContextLine: function(){
         return (
             <div class='context'>
-                Who: <input type='text' ref='who'/><br/>
-                Where: <input type='text' ref='where'/><br/>
-                When: <input type='text' ref='when'/>
+                Who: <input type='text' ref='who' defaultValue={this.state.who}/><br/>
+                Where: <input type='text' ref='where' defaultValue={this.state.where}/><br/>
+                When: <input type='text' ref='when' defaultValue={this.state.when}/>
             </div>
         )
     },
