@@ -10,12 +10,14 @@ var RouteHandler = Router.RouteHandler;
 var Post = require('./components/Post');
 var PostList = require('./components/PostList');
 var CreatePost = require('./components/CreatePost');
+var OnePost = require('./components/OnePost');
 
 var routes = (
   <Route name="home" path="/">
     <Route handler={PostList}/>
     <Route name="page" path="/page/:pageNo" handler={PostList}/>
     <Route name="newPost" path="/new" handler={CreatePost}/>
+    <Route name="post" path="/:writtenBy/:postId" handler={OnePost} />
   </Route>
 );
 
