@@ -13,8 +13,20 @@ var Post = React.createClass({
 
     getInitialState: function() {
         return {
-            editMode: this.props.edit || false
+            editMode: this.props.edit || false,
+            who: this.props.post.who,
+            where: this.props.post.where,
+            when: this.props.post.when
         };
+    },
+
+    componentWillReceiveProps: function(newProps){
+        this.setState({
+            editMode: newProps.edit || false,
+            who: newProps.post.who,
+            where: newProps.post.where,
+            when: newProps.post.when
+        });
     },
 
     startEdit: function() {
@@ -23,11 +35,21 @@ var Post = React.createClass({
         });
     },
 
-    stopEdit: function() {
+    stopEdit: function(updateState) {
+        var updateState = updateState || false;
         console.log("... stop");
-        this.setState({
+
+        var state = {
             editMode: false
-        });
+        }
+
+        if(updateState){
+            state['who'] = this.getWho();
+            state['where'] = this.getWhere();
+            state['when'] = this.getWhen();
+        }
+
+        this.setState(state);
     },
 
     getEditMode: function(){
@@ -50,6 +72,18 @@ var Post = React.createClass({
 
     getContent: function(){
         return React.findDOMNode(this.refs.myContent).innerHTML;
+    },
+
+    getWho: function(){
+        return React.findDOMNode(this.refs.who).value;
+    },
+
+    getWhere: function(){
+        return React.findDOMNode(this.refs.where).value;
+    },
+
+    getWhen: function(){
+        return React.findDOMNode(this.refs.when).value;
     },
 
     getSaveHeaders: function(){
@@ -76,6 +110,10 @@ var Post = React.createClass({
     buildJSON: function(){
         var json = {};
         json['content'] = this.getContent();
+        json['who'] = this.getWho();
+        json['where'] = this.getWhere();
+        json['when'] = this.getWhen();
+        console.log(json);
         return json;
     },
 
@@ -98,7 +136,7 @@ var Post = React.createClass({
 
     saveAndStopEdit: function(){
         console.log('save and stoping...');
-        this.save(this.stopEdit);
+        this.save(this.stopEditAndUpdate);
     },
 
     save: function(success, error){
@@ -107,22 +145,63 @@ var Post = React.createClass({
         $.ajax(saveCall);
     },
 
-    render: function() {
-        var renderedSave = (<input type='button' onClick={this.saveAndStopEdit} value='Save' />);
-        var renderedEdit = '';
-        if(!this.getEditMode()){
-            renderedEdit = (<input type='button' onClick={this.startEdit} value='Edit' />);
+    stopEditAndUpdate: function(){
+        this.stopEdit(true);
+    },
+
+    getContextLine: function(){
+        var where = '';
+        if(this.state.where){
+            where = (
+                <span class='where'>{this.state.where}</span>
+            )
         }
+
+        var who = '';
+        if(this.state.who){
+            who = (
+                <span class='who'>{this.state.who}</span>
+            )
+        }
+
+        var when = '';
+        if(this.state.when){
+            when = (
+                <span class='when'>{this.state.when}</span>
+            )
+        }
+
+        return (
+            <div class='context'>
+                { who ? 'by ' : ''}{ who ? who : '' }
+                { where ? ' in ' : ''}{ where ? where : '' }
+                { when ? ' in ' : ''}{ when ? when : '' }
+            </div>
+        )
+    },
+
+    getEditContextLine: function(){
+        return (
+            <div class='context'>
+                Who: <input type='text' ref='who' defaultValue={this.state.who}/><br/>
+                Where: <input type='text' ref='where' defaultValue={this.state.where}/><br/>
+                When: <input type='text' ref='when' defaultValue={this.state.when}/>
+            </div>
+        )
+    },
+
+    render: function() {
 
         return (
             <div>
                 <article contentEditable={this.getEditMode()} ref="myContent"
                 dangerouslySetInnerHTML={{__html:this.props.children}} />
-                <span class='author'>
-                    by <strong>{this.props.username}</strong>
-                </span>
-                {renderedEdit}
-                {renderedSave}
+                { this.getEditMode() ? this.getEditContextLine() :
+                                       this.getContextLine() }
+                { !this.getEditMode() ? <span class='author'>by <strong>{this.props.username}</strong></span> :
+                                        '' }
+                { this.getEditMode() ? <input type='button' onClick={this.saveAndStopEdit} value='Save' /> :
+                                       <input type='button' onClick={this.startEdit} value='Edit' /> }
             </div>
         );
     }
