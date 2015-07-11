@@ -28,3 +28,17 @@ class PostViewSet(viewsets.ModelViewSet):
 
         request.data["written_by"] = request.user.pk
         return super(PostViewSet, self).update(request, *args, **kwargs)
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned posts to a given user, by filtering
+        against a 'username' query parameter in the URL.
+        """
+
+        queryset = Post.objects.all()
+        username = self.request.query_params.get('written_by', None)
+
+        if username:
+            queryset = self.queryset.filter(written_by__username=username)
+
+        return queryset
