@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require('react-router').Link;
 var cookie = require('react-cookie');
 var $ = require('jQuery');
 
@@ -194,6 +195,7 @@ var Post = React.createClass({
 
         return (
             <div>
+                { this.props.username ? <Link to="post" params={{writtenBy: this.props.username, 'postId': this.props.myId }} >Permalink</Link> : '' }
                 <article contentEditable={this.getEditMode()} ref="myContent"
                 dangerouslySetInnerHTML={{__html:this.props.children}} />
                 { this.getEditMode() ? this.getEditContextLine() :
