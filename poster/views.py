@@ -35,10 +35,10 @@ class PostViewSet(viewsets.ModelViewSet):
         against a 'username' query parameter in the URL.
         """
 
-        queryset = Post.objects.all()
+        queryset = self.queryset
         username = self.request.query_params.get('written_by', None)
 
         if username:
-            queryset = self.queryset.filter(written_by__username=username)
+            queryset = queryset.filter(written_by__username=username)
 
         return queryset
