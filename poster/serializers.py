@@ -16,7 +16,6 @@ class PostSerializer(serializers.ModelSerializer):  # serializers.HyperlinkedMod
         fields = ('id', 'content', 'written_by', 'published_at', 'username',
                   'where', 'when', 'who')
 
-
     def validate_content(self, value):
 
         return bleach.clean(
