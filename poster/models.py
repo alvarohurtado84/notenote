@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import strip_tags
 from django.utils.text import slugify
 
 from nuser.models import User
@@ -27,7 +28,7 @@ class Post(models.Model):
         """Set slug with a slug created using content (or others)."""
 
         if not self.slug:
-            self.slug = slugify(self.content)
+            self.slug = slugify(strip_tags(self.content))
 
             if self.who:
                 self.slug = "-".join([self.slug, slugify(self.who)])
