@@ -14,7 +14,7 @@ class PostSerializer(serializers.ModelSerializer):  # serializers.HyperlinkedMod
     class Meta:
         model = Post
         fields = ('id', 'content', 'written_by', 'published_at', 'username',
-                  'where', 'when', 'who')
+                  'where', 'when', 'who', 'slug')
 
     def validate_content(self, value):
 

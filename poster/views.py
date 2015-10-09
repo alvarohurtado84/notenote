@@ -12,6 +12,7 @@ class PostViewSet(viewsets.ModelViewSet):
         Post.objects.order_by('-created_at') # .exclude(published_at=None).order_by('-published_at')
     )
     serializer_class = PostSerializer
+    lookup_field = 'slug'
 
     def create(self, request, *args, **kwargs):
         request.data["written_by"] = request.user.pk
@@ -36,7 +37,8 @@ class PostViewSet(viewsets.ModelViewSet):
         """
 
         queryset = self.queryset
-        username = self.request.query_params.get('written_by', None)
+        # This user name comes from the PostCustomRouter
+        username = self.kwargs.get('username')
 
         if username:
             queryset = queryset.filter(written_by__username=username)
