@@ -29,4 +29,13 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.content)
 
+            if self.who:
+                self.slug = "-".join([self.slug, slugify(self.who)])
+
+            if self.where:
+                self.slug = "-".join([self.slug, slugify(self.where)])
+
+            if self.when:
+                self.slug = "-".join([self.slug, slugify(self.when)])
+
         return super(Post, self).save(*args, **kwargs)
