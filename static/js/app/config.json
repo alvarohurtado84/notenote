@@ -1,4 +1,5 @@
 {
     "postsUrl": "/api/posts/",
-    "updatePostUrl": "/api/posts/{id}/"
+    "getPostUrl": "/api/posts/{username}/{slug}/",
+    "updatePostUrl": "/api/posts/{username}/{slug}/"
 }

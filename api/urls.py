@@ -3,9 +3,10 @@ from django.conf.urls import include, url
 from rest_framework import routers
 
 from poster.views import PostViewSet
+from poster.routers import PostCustomRouter
 
 
-router = routers.DefaultRouter()
+router = PostCustomRouter()
 router.register(r'posts', PostViewSet)
 
 

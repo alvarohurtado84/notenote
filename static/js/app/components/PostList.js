@@ -97,7 +97,7 @@ var PostList = React.createClass({
         console.log('rendering page... ' + this.getCurrentPage());
         var postNodes = this.state.data.map(function (post){
             return (
-                <Post username={post.username} myId={post.id} post={post}>{post.content}</Post>
+                <Post username={post.username} slug={post.slug} post={post}>{post.content}</Post>
             );
         });
 
