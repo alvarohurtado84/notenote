@@ -10,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):  # serializers.HyperlinkedMod
 
     username = serializers.CharField(source='written_by.username',
                                      read_only=True)
+    slug = serializers.CharField(read_only=True)
 
     class Meta:
         model = Post

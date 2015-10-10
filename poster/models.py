@@ -9,7 +9,7 @@ class Post(models.Model):
     """Stores every article that will be written by the users."""
 
     content = models.TextField()
-    slug = models.SlugField(unique=False)
+    slug = models.SlugField(unique=False, null=True, blank=True)
 
     written_by = models.ForeignKey(User)
 
