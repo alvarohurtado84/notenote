@@ -18,11 +18,11 @@ var OnePost = React.createClass({
 
     getInitialState: function(){
 
-        console.log("Params ONEPOST: " + this.context.router.getCurrentParams().postId + ' ----- ' + this.context.router.getCurrentParams().writtenBy)
+        console.log("Params ONEPOST: " + this.context.router.getCurrentParams().username + ' ----- ' + this.context.router.getCurrentParams().slug)
 
         return {
-            id: this.context.router.getCurrentParams().postId,
-            writtenBy: this.context.router.getCurrentParams().writtenBy,
+            slug: this.context.router.getCurrentParams().slug,
+            username: this.context.router.getCurrentParams().username,
             post: {}
         };
     },
@@ -64,7 +64,7 @@ var OnePost = React.createClass({
         return (
             <main>
                 <Link to='newPost'>New post</Link>
-                <Post username={this.state.post.username} myId={this.state.post.id} post={this.state.post}>{this.state.post.content}</Post>
+                <Post username={this.state.post.username} slug={this.state.post.slug} post={this.state.post}>{this.state.post.content}</Post>
             </main>
         )
     }

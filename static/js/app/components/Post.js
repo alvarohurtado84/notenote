@@ -63,7 +63,7 @@ var Post = React.createClass({
 
     getSaveUrl: function(){
         var url;
-        if(this.getId()){
+        if(this.props.post.slug){
             url = formatUnicorn(
                 updatePostUrl,
                 {
@@ -99,19 +99,11 @@ var Post = React.createClass({
         }
 
         // if the post already exist (so it has an id)
-        if(this.getId()){
+        if(this.props.post.slug){
             headers['X-HTTP-Method-Override'] = 'PUT';
         }
 
         return headers;
-    },
-
-    getId: function(){
-        if(this.props.myId){
-            return this.props.myId;
-        }else{
-            return false;
-        }
     },
 
     buildJSON: function(){
@@ -201,7 +193,7 @@ var Post = React.createClass({
 
         return (
             <div>
-                { this.props.username ? <Link to="post" params={{writtenBy: this.props.username, 'postId': this.props.myId }} >Permalink</Link> : '' }
+                { this.props.username ? <Link to="post" params={{username: this.props.username, slug: this.props.post.slug }} >Permalink</Link> : '' }
                 <article contentEditable={this.getEditMode()} ref="myContent"
                 dangerouslySetInnerHTML={{__html:this.props.children}} />
                 { this.getEditMode() ? this.getEditContextLine() :

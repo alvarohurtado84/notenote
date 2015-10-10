@@ -17,7 +17,7 @@ var routes = (
     <Route handler={PostList}/>
     <Route name="page" path="/page/:pageNo" handler={PostList}/>
     <Route name="newPost" path="/new" handler={CreatePost}/>
-    <Route name="post" path="/:writtenBy/:postId" handler={OnePost} />
+    <Route name="post" path="/:username/:slug" handler={OnePost} />
   </Route>
 );
 
