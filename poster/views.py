@@ -19,7 +19,9 @@ class PostViewSet(viewsets.ModelViewSet):
         return super(PostViewSet, self).create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-
+        """Update the post with the received data. It checks if the logged in
+        user is the owner of the post and, therefore, it is allowed to do it.
+        """
         if self.get_object().written_by != request.user:
             # This user is not allowed to update this post
             raise MethodNotAllowed(
@@ -31,9 +33,8 @@ class PostViewSet(viewsets.ModelViewSet):
         return super(PostViewSet, self).update(request, *args, **kwargs)
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned posts to a given user, by filtering
-        against a 'username' query parameter in the URL.
+        """Optionally restricts the returned posts to a given user, by
+        filtering against a 'username' query parameter in the URL.
         """
 
         queryset = self.queryset
