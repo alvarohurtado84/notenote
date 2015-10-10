@@ -1,5 +1,5 @@
 {
     "postsUrl": "/api/posts/",
-    "getPostUrl": "/api/posts/{id}/?written_by={writtenBy}",
-    "updatePostUrl": "/api/posts/{id}/"
+    "getPostUrl": "/api/posts/{username}/{slug}/",
+    "updatePostUrl": "/api/posts/{username}/{slug}/"
 }

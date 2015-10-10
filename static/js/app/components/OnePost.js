@@ -31,8 +31,8 @@ var OnePost = React.createClass({
         return formatUnicorn(
             getPostUrl,
             {
-                id: this.state.id,
-                writtenBy: this.state.writtenBy
+                slug: this.state.slug,
+                username: this.state.username
             }
         );
     },

@@ -64,7 +64,13 @@ var Post = React.createClass({
     getSaveUrl: function(){
         var url;
         if(this.getId()){
-            url = formatUnicorn(updatePostUrl, {id: this.getId()});
+            url = formatUnicorn(
+                updatePostUrl,
+                {
+                    slug: this.props.post.slug,
+                    username: this.props.post.username
+                }
+            );
         }else{
             url = postsUrl;
         }
